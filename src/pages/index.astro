@@ -1,0 +1,1618 @@
+
+---
+const doodles = [
+  { symbol: "✿", class: "doodle d1" },
+  { symbol: "✧", class: "doodle d2" },
+  { symbol: "♡", class: "doodle d3" },
+  { symbol: "✳", class: "doodle d4" },
+  { symbol: "⋆", class: "doodle d5" },
+  { symbol: "❀", class: "doodle d6" },
+  { symbol: "✦", class: "doodle d7" },
+  { symbol: "୨୧", class: "doodle d8" },
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#778365" />
+  <title>Fatima — A Little Story</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <main>
+    <section class="stage">
+      <!-- Cream background revealed underneath -->
+      <div class="revealed"></div>
+
+      <!-- Main hero -->
+      <div class="hero">
+
+        <div class="top-note">✿ &nbsp; A LITTLE WORLD OF MY OWN &nbsp; ✿</div>
+
+        <div class="name-container">
+          <p class="little-heading">the story of</p>
+          <h1>Fatima<span>.</span></h1>
+          <p class="subtitle">CREATIVE SOUL · DEVELOPER · DREAMER</p>
+        </div>
+
+        <!-- Floating doodles -->
+        {doodles.map((doodle) => (
+          <span class={doodle.class} aria-hidden="true">
+            {doodle.symbol}
+          </span>
+        ))}
+
+        <!-- Cloud foreground -->
+        <div class="cloud">
+          <svg viewBox="0 0 1440 260" preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="
+                M0 115
+                C45 90 85 85 130 110
+                C165 35 250 30 300 95
+                C355 40 420 50 465 105
+                C510 35 600 40 650 100
+                C710 35 790 40 840 105
+                C900 45 980 35 1030 100
+                C1085 30 1170 40 1215 105
+                C1280 40 1360 45 1400 100
+                C1420 90 1430 100 1440 110
+                L1440 260 L0 260 Z"
+              fill="#F3F0E5"
+            />
+          </svg>
+        </div>
+
+        <div class="scroll-note">
+          <span>SCROLL TO EXPLORE</span>
+          <span class="arrow">↓</span>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const cloud = document.querySelector(".cloud");
+    const hero = document.querySelector(".hero");
+
+    if (cloud && hero) {
+      gsap.to(cloud, {
+        y: "-100vh",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".stage",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+
+      gsap.to(hero, {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".stage",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+    }
+  </script>
+</body>
+</html>
+
+<style>
+  :root {
+    --olive: #778365;
+    --cream: #F3F0E5;
+    --pink: #E8C4BD;
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    width: 100%;
+    background: var(--cream);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  .stage {
+    position: relative;
+    height: 200vh;
+  }
+
+  .revealed {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+  }
+
+  .hero {
+    height: 100vh;
+    height: 100svh;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: var(--olive);
+    color: var(--cream);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-note {
+    position: absolute;
+    top: 35px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #E9E5D5;
+  }
+
+  .name-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 65px;
+  }
+
+  .little-heading {
+    font: italic 24px var(--serif);
+    margin-bottom: 0;
+  }
+
+  h1 {
+    font: 500 clamp(90px, 17vw, 210px)/1 var(--serif);
+    letter-spacing: -9px;
+    margin: 10px 0 25px;
+  }
+
+  h1 span {
+    color: var(--pink);
+  }
+
+  .subtitle {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #E9C7C0;
+  }
+
+  .doodle {
+    position: absolute;
+    color: var(--cream);
+    z-index: 2;
+    pointer-events: none;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .d1 { top: 23%; left: 16%; font-size: 36px; color: var(--pink); }
+  .d2 { top: 18%; right: 24%; font-size: 35px; animation-delay: -2s; }
+  .d3 { top: 48%; left: 10%; font-size: 34px; animation-delay: -1s; }
+  .d4 { top: 65%; right: 14%; font-size: 42px; color: var(--pink); animation-delay: -3s; }
+  .d5 { top: 72%; left: 27%; font-size: 30px; animation-delay: -2s; }
+  .d6 { top: 35%; right: 12%; font-size: 32px; animation-delay: -4s; }
+  .d7 { top: 75%; right: 32%; font-size: 28px; animation-delay: -1s; }
+  .d8 { top: 30%; left: 28%; font-size: 26px; color: var(--pink); animation-delay: -3s; }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+    50% { transform: translate(12px, -18px) rotate(10deg); }
+  }
+
+  .cloud {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    z-index: 5;
+    will-change: transform;
+  }
+
+  .cloud svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .scroll-note {
+    position: absolute;
+    z-index: 6;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--olive);
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .arrow {
+    font-size: 22px;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    50% { transform: translateY(7px); }
+  }
+
+  @media(max-width: 600px) {
+    h1 {
+      letter-spacing: -5px;
+      font-size: 19vw;
+    }
+
+    .d1 { left: 8%; }
+    .d2 { right: 10%; }
+    .d3 { left: 5%; }
+    .d4 { right: 7%; }
+    .d8 { left: 15%; }
+
+    .cloud {
+      height: 150px;
+    }
+
+    .top-note {
+      font-size: 8px;
+    }
+  }
+
+  @media(prefers-reduced-motion: reduce) {
+    .doodle, .arrow {
+      animation: none;
+    }
+  }
+</style>
+
+
+<!-- FATIMA INTRODUCTION SECTION -->
+
+<section class="fatima-intro" id="about">
+
+  <div class="intro-inner">
+
+    <!-- LEFT: CODED COMIC AVATAR -->
+    <div class="avatar-side reveal">
+
+      <div class="avatar-sparkle sparkle-one">✧</div>
+      <div class="avatar-sparkle sparkle-two">✿</div>
+      <div class="avatar-sparkle sparkle-three">♡</div>
+
+      <div class="avatar-frame">
+
+        <span class="avatar-label">MEET THE GIRL ✿</span>
+
+        <!-- Illustrated character made with SVG -->
+        <svg viewBox="0 0 400 450" class="fatima-avatar"
+          xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background -->
+          <path
+            d="M70 220 C20 90 110 20 210 35
+               C340 10 390 130 340 250
+               L350 420 L50 420 Z"
+            fill="#D9DDC8"
+          />
+
+          <!-- Hair behind head -->
+          <path
+            d="M105 200 C65 85 120 55 200 65
+               C310 35 345 125 315 240
+               L300 340 L100 340 Z"
+            fill="#514438"
+          />
+
+          <!-- Neck -->
+          <rect x="168" y="285" width="65" height="85"
+            rx="25" fill="#DDAF91"/>
+
+          <!-- Body -->
+          <path
+            d="M75 440 C80 350 125 335 200 335
+               C280 335 325 365 330 440 Z"
+            fill="#879477"
+          />
+
+          <!-- Shirt collar -->
+          <path
+            d="M150 345 L200 390 L250 345"
+            fill="#F3F0E5"
+          />
+
+          <!-- Face -->
+          <ellipse cx="200" cy="210" rx="94" ry="115"
+            fill="#E8BEA1"/>
+
+          <!-- Hair framing face -->
+          <path
+            d="M107 180 C85 75 140 50 205 65
+               C295 45 325 125 293 190
+               C285 135 260 110 220 105
+               C180 140 145 125 107 180 Z"
+            fill="#514438"
+          />
+
+          <!-- Side hair -->
+          <path d="M110 145 C70 180 100 300 135 315
+            L130 190 Z" fill="#514438"/>
+
+          <path d="M290 145 C330 180 300 300 265 315
+            L270 190 Z" fill="#514438"/>
+
+          <!-- Eyes -->
+          <ellipse cx="166" cy="215" rx="6" ry="9" fill="#514438"/>
+          <ellipse cx="234" cy="215" rx="6" ry="9" fill="#514438"/>
+
+          <!-- Blush -->
+          <ellipse cx="140" cy="245" rx="17" ry="9"
+            fill="#D98F91" opacity=".45"/>
+          <ellipse cx="260" cy="245" rx="17" ry="9"
+            fill="#D98F91" opacity=".45"/>
+
+          <!-- Smile -->
+          <path d="M185 265 Q200 280 215 265"
+            stroke="#9B6258" stroke-width="3"
+            fill="none" stroke-linecap="round"/>
+
+          <!-- Hair details -->
+          <path d="M145 85 Q175 45 220 75"
+            stroke="#786252" stroke-width="5"
+            fill="none" stroke-linecap="round"/>
+
+          <!-- Tiny earrings -->
+          <circle cx="105" cy="245" r="6" fill="#D4AE71"/>
+          <circle cx="295" cy="245" r="6" fill="#D4AE71"/>
+
+          <!-- Decorative flower -->
+          <g transform="translate(285 100)">
+            <circle cx="0" cy="-9" r="7" fill="#E8C4BD"/>
+            <circle cx="9" cy="0" r="7" fill="#E8C4BD"/>
+            <circle cx="0" cy="9" r="7" fill="#E8C4BD"/>
+            <circle cx="-9" cy="0" r="7" fill="#E8C4BD"/>
+            <circle cx="0" cy="0" r="5" fill="#D5B46A"/>
+          </g>
+
+        </svg>
+
+        <div class="avatar-bottom">
+          <span>Fatima</span>
+          <span>♡</span>
+        </div>
+
+      </div>
+
+      <p class="avatar-caption">A little creative soul on the internet.</p>
+    </div>
+
+
+    <!-- RIGHT: INTRODUCTION -->
+    <div class="intro-copy reveal">
+
+      <span class="section-kicker">OH, HI THERE! ☁</span>
+
+      <h2>
+        I'm Fatima,<br />
+        <span>your friendly</span><br />
+        creative developer.
+      </h2>
+
+      <p>
+        I love turning ideas into beautiful digital experiences.
+        A little bit of design, a little bit of code,
+        and a whole lot of creativity.
+      </p>
+
+      <p>
+        Here's a little peek into my world and the things
+        I love doing.
+      </p>
+
+      <div class="little-note">
+        <span>Currently making the internet prettier</span>
+        <span>✿</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- WHAT I DO CARDS -->
+
+  <div class="services-area reveal">
+
+    <div class="services-heading">
+      <span class="section-kicker">MY LITTLE SUPERPOWERS ✳</span>
+      <h3>Things I love <span>doing.</span></h3>
+      <p>Four little things that make my creative world go round.</p>
+    </div>
+
+    <div class="service-cards">
+
+      <article class="service-card card-sage">
+        <div class="service-icon">✿</div>
+        <span class="service-number">01</span>
+        <h4>Webflow</h4>
+        <p>Designing and building beautiful websites with Webflow.</p>
+        <span class="card-bottom">Creative builder ↗</span>
+      </article>
+
+      <article class="service-card card-pink">
+        <div class="service-icon">☁</div>
+        <span class="service-number">02</span>
+        <h4>Astro</h4>
+        <p>Building fast, modern and delightful websites with Astro.</p>
+        <span class="card-bottom">Code enthusiast ↗</span>
+      </article>
+
+      <article class="service-card card-yellow">
+        <div class="service-icon">♡</div>
+        <span class="service-number">03</span>
+        <h4>Frontend</h4>
+        <p>Bringing interfaces to life with HTML, CSS and JavaScript.</p>
+        <span class="card-bottom">Pixel perfectionist ↗</span>
+      </article>
+
+      <article class="service-card card-lilac">
+        <div class="service-icon">✧</div>
+        <span class="service-number">04</span>
+        <h4>UI & Design</h4>
+        <p>Creating thoughtful layouts, playful details and lovely experiences.</p>
+        <span class="card-bottom">Little idea machine ↗</span>
+      </article>
+
+    </div>
+  </div>
+
+</section>
+
+<style>
+	
+/* FATIMA INTRO */
+
+.fatima-intro {
+  position: relative;
+  background: #F3F0E5;
+  color: #414738;
+  padding: 120px 8% 140px;
+  overflow: hidden;
+}
+
+.intro-inner {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 100px;
+}
+
+/* AVATAR */
+
+.avatar-side {
+  position: relative;
+  text-align: center;
+}
+
+.avatar-frame {
+  position: relative;
+  max-width: 390px;
+  margin: auto;
+  padding: 25px 20px 0;
+  background: #E5E6D8;
+  border-radius: 180px 180px 15px 15px;
+  overflow: hidden;
+}
+
+.avatar-label {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 100%;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #697653;
+  z-index: 2;
+}
+
+.fatima-avatar {
+  width: 100%;
+  display: block;
+  margin-top: 25px;
+  transition: transform .5s ease;
+}
+
+.avatar-frame:hover .fatima-avatar {
+  transform: translateY(-8px) rotate(-2deg);
+}
+
+.avatar-bottom {
+  display: flex;
+  justify-content: space-between;
+  background: #697653;
+  color: #F3F0E5;
+  padding: 16px 22px;
+  font: italic 18px var(--serif);
+  border-radius: 0 0 10px 10px;
+}
+
+.avatar-caption {
+  font: italic 15px var(--serif);
+  color: #697653;
+  margin-top: 22px;
+}
+
+.avatar-sparkle {
+  position: absolute;
+  z-index: 3;
+  color: #C99E9C;
+  font-size: 35px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.sparkle-one {
+  top: 15%;
+  left: 0;
+}
+
+.sparkle-two {
+  top: 30%;
+  right: -10px;
+  animation-delay: -2s;
+}
+
+.sparkle-three {
+  bottom: 20%;
+  left: -10px;
+  animation-delay: -1s;
+}
+
+/* INTRO TEXT */
+
+.intro-copy {
+  max-width: 550px;
+}
+
+.section-kicker {
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #879477;
+}
+
+.intro-copy h2 {
+  font: 500 clamp(42px, 5vw, 68px)/1.15 var(--serif);
+  letter-spacing: -2px;
+  margin: 25px 0;
+}
+
+.intro-copy h2 span {
+  color: #879477;
+  font-style: italic;
+}
+
+.intro-copy > p {
+  font-size: 14px;
+  line-height: 2;
+  color: #777D6C;
+}
+
+.little-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+  padding: 12px 18px;
+  border: 1px dashed #B4B99F;
+  border-radius: 40px;
+  font: italic 13px var(--serif);
+  color: #697653;
+}
+
+/* SERVICES */
+
+.services-area {
+  max-width: 1150px;
+  margin: 130px auto 0;
+}
+
+.services-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.services-heading h3 {
+  font: 500 clamp(38px, 5vw, 55px) var(--serif);
+  margin: 20px 0 10px;
+}
+
+.services-heading h3 span {
+  color: #879477;
+  font-style: italic;
+}
+
+.services-heading p {
+  font-size: 13px;
+  color: #858977;
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.service-card {
+  position: relative;
+  min-height: 270px;
+  padding: 25px 22px;
+  border-radius: 12px;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px) rotate(-1deg);
+  box-shadow: 0 15px 30px #41473812;
+}
+
+.card-sage { background: #E0E5D5; }
+.card-pink { background: #F0DDD8; }
+.card-yellow { background: #EDE7D2; }
+.card-lilac { background: #E7E2EA; }
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #FFFFFF80;
+  border-radius: 50%;
+  font-size: 25px;
+  color: #697653;
+}
+
+.service-number {
+  position: absolute;
+  right: 22px;
+  top: 35px;
+  font-size: 10px;
+  color: #858977;
+  letter-spacing: 2px;
+}
+
+.service-card h4 {
+  font: 500 26px var(--serif);
+  margin: 30px 0 12px;
+  color: #414738;
+}
+
+.service-card p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #707565;
+}
+
+.card-bottom {
+  display: block;
+  margin-top: 25px;
+  font: italic 12px var(--serif);
+  color: #697653;
+}
+
+/* SCROLL REVEAL */
+/* SCROLL REVEAL */
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.animate-reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.reveal.animate-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.animate-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+  .intro-inner {
+    grid-template-columns: 1fr;
+    gap: 65px;
+  }
+
+  .avatar-frame {
+    max-width: 340px;
+  }
+
+  .intro-copy {
+    text-align: center;
+    margin: auto;
+  }
+
+  .service-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 500px) {
+  .fatima-intro {
+    padding: 80px 6%;
+  }
+
+  .service-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .service-card {
+    min-height: 250px;
+    padding: 18px 14px;
+  }
+
+  .service-card h4 {
+    font-size: 21px;
+  }
+
+  .service-card p {
+    font-size: 11px;
+  }
+
+  .services-area {
+    margin-top: 90px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .avatar-sparkle {
+    animation: none;
+  }
+}
+</style>
+
+
+<section class="work-story">
+
+  <div class="work-world">
+
+    <div class="comic-label">CHAPTER 02 · THE WORK BEHIND THE MAGIC</div>
+
+    <div class="work-title">
+      <span class="work-small">A little patience, a lot of passion...</span>
+      <h2>Dream it.<br/><em>Work for it.</em></h2>
+      <span class="work-subtitle">GOOD THINGS TAKE A LITTLE MAGIC ♡</span>
+    </div>
+
+    <!-- Floating comic doodles -->
+    <span class="work-doodle wd1">✳</span>
+    <span class="work-doodle wd2">✿</span>
+    <span class="work-doodle wd3">✧</span>
+    <span class="work-doodle wd4">♡</span>
+    <span class="work-doodle wd5">⋆</span>
+
+    <!-- Main illustrated workspace -->
+    <div class="work-illustration">
+
+      <svg class="work-scene" viewBox="0 0 1000 650"
+        xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Background halo -->
+        <ellipse cx="500" cy="340" rx="420" ry="280"
+          fill="#E3E5D6"/>
+
+        <!-- Sun -->
+        <circle cx="790" cy="115" r="65" fill="#E9C6A7"/>
+        <path d="M790 25 V5 M790 225 V205 M700 115 H680 M900 115 H880"
+          stroke="#D7B28D" stroke-width="5" stroke-linecap="round"/>
+
+        <!-- Floating stars -->
+        <g fill="#A0A987">
+          <path d="M175 130 L185 155 L210 165 L185 175 L175 200 L165 175 L140 165 L165 155 Z"/>
+          <path d="M835 285 L844 305 L864 314 L844 323 L835 343 L826 323 L806 314 L826 305 Z"/>
+          <path d="M300 70 L308 88 L326 96 L308 104 L300 122 L292 104 L274 96 L292 88 Z"/>
+        </g>
+
+        <!-- Plant pot -->
+        <path d="M110 390 L185 390 L172 510 L125 510 Z"
+          fill="#C99E9C"/>
+        <path d="M148 390 Q110 320 90 300 M148 390 Q160 310 200 280 M148 390 Q150 300 145 260"
+          stroke="#697653" stroke-width="8" fill="none"
+          stroke-linecap="round"/>
+        <g fill="#879477">
+          <ellipse cx="95" cy="305" rx="28" ry="13" transform="rotate(35 95 305)"/>
+          <ellipse cx="200" cy="280" rx="30" ry="13" transform="rotate(-35 200 280)"/>
+          <ellipse cx="145" cy="270" rx="28" ry="13"/>
+        </g>
+
+        <!-- Desk -->
+        <path d="M80 465 Q500 420 920 465 L920 550 Q500 510 80 550 Z"
+          fill="#B99B7A"/>
+        <path d="M120 535 L130 630 M870 535 L860 630"
+          stroke="#8D765D" stroke-width="22"/>
+
+        <!-- Laptop -->
+        <rect x="330" y="265" width="340" height="205"
+          rx="16" fill="#64735B"/>
+        <rect x="345" y="280" width="310" height="175"
+          rx="9" fill="#E5E8D9"/>
+
+        <!-- Laptop screen decoration -->
+        <rect x="390" y="315" width="220" height="12" rx="6"
+          fill="#9BA58A"/>
+        <rect x="410" y="340" width="180" height="9" rx="5"
+          fill="#C7B9A5"/>
+        <rect x="430" y="365" width="140" height="9" rx="5"
+          fill="#C7B9A5"/>
+        <circle cx="500" cy="420" r="10" fill="#C99E9C"/>
+
+        <!-- Laptop base -->
+        <path d="M305 470 L695 470 L740 495 Q500 520 260 495 Z"
+          fill="#879477"/>
+
+        <!-- Coffee mug -->
+        <rect x="735" y="400" width="75" height="78"
+          rx="13" fill="#E8C4BD"/>
+        <path d="M810 420 Q865 415 840 455 L810 455"
+          stroke="#C99E9C" stroke-width="10" fill="none"/>
+        <path d="M760 380 Q745 355 770 340 M785 380 Q810 355 790 335"
+          stroke="#C99E9C" stroke-width="4" fill="none"
+          stroke-linecap="round"/>
+
+        <!-- Notebook -->
+        <rect x="180" y="430" width="115" height="65"
+          rx="6" fill="#F3F0E5" transform="rotate(-10 180 430)"/>
+        <path d="M190 455 L270 440 M195 470 L260 455"
+          stroke="#B7BBA5" stroke-width="3"/>
+
+        <!-- Pencil -->
+        <path d="M700 510 L790 535"
+          stroke="#D6AD70" stroke-width="9" stroke-linecap="round"/>
+
+        <!-- Flowers -->
+        <g transform="translate(875 390)">
+          <circle cy="-12" r="11" fill="#E8C4BD"/>
+          <circle cx="12" r="11" fill="#E8C4BD"/>
+          <circle cy="12" r="11" fill="#E8C4BD"/>
+          <circle cx="-12" r="11" fill="#E8C4BD"/>
+          <circle r="7" fill="#D6AD70"/>
+        </g>
+
+        <!-- Tiny floating hearts -->
+        <g fill="#C99E9C">
+          <path d="M260 245 C240 220 210 250 260 285 C310 250 280 220 260 245Z"/>
+          <path d="M720 190 C705 175 685 195 720 220 C755 195 735 175 720 190Z"/>
+        </g>
+
+      </svg>
+
+      <div class="comic-bubble bubble-one">
+        Just one more little detail!
+      </div>
+
+      <div class="comic-bubble bubble-two">
+        Making it lovely ♡
+      </div>
+
+    </div>
+
+	
+<!-- CHAI ADDICT COMIC CORNER -->
+
+<div class="chai-comic">
+
+  <div class="chai-heading">
+    <span>☕ A VERY IMPORTANT PART OF MY WORKFLOW</span>
+    <h3>Chai first. <em>Everything else later.</em></h3>
+  </div>
+
+  <div class="chai-scene">
+
+    <!-- Little decorative elements -->
+    <span class="chai-star star-a">✧</span>
+    <span class="chai-star star-b">✿</span>
+    <span class="chai-star star-c">♡</span>
+
+    <!-- Kettle -->
+    <svg class="chai-kettle" viewBox="0 0 300 250"
+      xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Kettle handle -->
+      <path d="M85 90 C15 40 15 190 90 170"
+        fill="none" stroke="#697653" stroke-width="13"
+        stroke-linecap="round"/>
+
+      <!-- Kettle body -->
+      <path d="M90 85 Q100 35 175 55 Q235 70 230 160
+        Q220 220 135 215 Q65 205 70 145 Z"
+        fill="#D9DDC8" stroke="#697653" stroke-width="5"/>
+
+      <!-- Lid -->
+      <path d="M110 65 Q150 35 195 65"
+        fill="#879477" stroke="#697653" stroke-width="4"/>
+
+      <circle cx="155" cy="43" r="10" fill="#C99E9C"/>
+
+      <!-- Spout -->
+      <path d="M220 100 Q280 75 280 120
+        Q275 145 230 140"
+        fill="#D9DDC8" stroke="#697653" stroke-width="5"/>
+
+      <!-- Kettle decoration -->
+      <path d="M120 125 Q150 100 180 125"
+        fill="none" stroke="#C99E9C" stroke-width="5"
+        stroke-linecap="round"/>
+
+      <circle cx="150" cy="155" r="8" fill="#C99E9C"/>
+
+    </svg>
+
+    <!-- Animated tea pour -->
+    <svg class="chai-pour" viewBox="0 0 150 200"
+      xmlns="http://www.w3.org/2000/svg">
+      <path class="tea-stream"
+        d="M20 0 C45 35 5 65 35 100 C55 130 25 150 45 200"
+        fill="none" stroke="#B87943" stroke-width="11"
+        stroke-linecap="round"/>
+
+      <circle class="tea-drop drop-one" cx="80" cy="55" r="7"
+        fill="#B87943"/>
+      <circle class="tea-drop drop-two" cx="100" cy="105" r="5"
+        fill="#B87943"/>
+      <circle class="tea-drop drop-three" cx="65" cy="145" r="6"
+        fill="#B87943"/>
+    </svg>
+
+    <!-- Chai glass -->
+    <svg class="chai-glass" viewBox="0 0 180 230"
+      xmlns="http://www.w3.org/2000/svg">
+
+      <defs>
+        <clipPath id="chaiGlassClip">
+          <path d="M38 35 L145 35 L130 205
+            Q90 225 53 205 Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- Glass outline -->
+      <path d="M38 35 L145 35 L130 205
+        Q90 225 53 205 Z"
+        fill="#FFFFFF80" stroke="#697653" stroke-width="5"/>
+
+      <!-- Tea inside -->
+      <g clip-path="url(#chaiGlassClip)">
+        <rect class="chai-liquid" x="30" y="95"
+          width="130" height="140" fill="#C68A53"/>
+
+        <path d="M30 95 Q65 80 100 95 Q130 105 160 92"
+          fill="none" stroke="#E6B77F" stroke-width="5"/>
+      </g>
+
+      <!-- Glass highlights -->
+      <path d="M53 55 L60 160"
+        stroke="#FFFFFF" stroke-width="5"
+        stroke-linecap="round" opacity=".65"/>
+
+      <!-- Little heart -->
+      <path d="M85 135 C70 120 60 140 85 160
+        C110 140 100 120 85 135Z"
+        fill="#F3F0E5"/>
+
+    </svg>
+
+    <!-- Steam -->
+    <div class="chai-steam steam-a">〰</div>
+    <div class="chai-steam steam-b">〰</div>
+
+    <!-- Speech bubble -->
+    <div class="chai-speech">
+      "Just one more cup..."
+      <span>♡</span>
+    </div>
+
+    <!-- Spill droplets -->
+    <span class="chai-spill spill-a">●</span>
+    <span class="chai-spill spill-b">●</span>
+    <span class="chai-spill spill-c">●</span>
+
+  </div>
+
+  <div class="chai-caption">
+    <span>✿</span>
+    <p>Powered by chai & unreasonable amounts of determination.</p>
+    <span>✿</span>
+  </div>
+
+</div>
+
+
+    <div class="work-bottom">
+      <span>✿ THE LITTLE DETAILS MATTER</span>
+      <span>MADE WITH CARE BY FATIMA ♡</span>
+    </div>
+
+  </div>
+
+  <!-- Closing text -->
+  <div class="work-message">
+    <span class="comic-label">AND THAT'S MY LITTLE SECRET ✧</span>
+    <h3>
+      I don't just make things.<br/>
+      <em>I put my heart into them.</em>
+    </h3>
+    <p>Curiosity keeps me going. Coffee helps a little, too.</p>
+  </div>
+
+</section>
+<style>
+	
+/* WORK ETHIC COMIC SECTION */
+
+.work-story {
+  background: #F3F0E5;
+  overflow: hidden;
+  color: #414738;
+}
+
+.work-world {
+  position: relative;
+  min-height: 100vh;
+  padding: 90px 5% 50px;
+  background: #E9EBDD;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.comic-label {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #778365;
+  font-weight: 600;
+}
+
+.work-title {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 45px;
+}
+
+.work-small {
+  font: italic 20px var(--serif);
+  color: #879477;
+}
+
+.work-title h2 {
+  font: 500 clamp(65px, 9vw, 115px)/.95 var(--serif);
+  letter-spacing: -5px;
+  margin: 18px 0;
+}
+
+.work-title h2 em {
+  color: #778365;
+}
+
+.work-subtitle {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #A17C77;
+}
+
+/* ILLUSTRATION */
+
+.work-illustration {
+  position: relative;
+  width: min(950px, 100%);
+  margin: 20px auto 0;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.work-scene {
+  width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.comic-bubble {
+  position: absolute;
+  background: #F3F0E5;
+  color: #697653;
+  border: 2px solid #697653;
+  padding: 15px 22px;
+  border-radius: 50%;
+  font: italic 14px var(--serif);
+  box-shadow: 3px 5px 0 #69765330;
+  animation: bubbleFloat 4s ease-in-out infinite;
+}
+
+.bubble-one {
+  top: 20%;
+  left: 2%;
+  transform: rotate(-8deg);
+}
+
+.bubble-two {
+  top: 40%;
+  right: 0;
+  animation-delay: -2s;
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+/* DOODLES */
+
+.work-doodle {
+  position: absolute;
+  z-index: 3;
+  color: #879477;
+  animation: doodleFloat 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.wd1 { top: 20%; left: 10%; font-size: 42px; }
+.wd2 { top: 40%; right: 8%; font-size: 36px; color: #C99E9C; }
+.wd3 { bottom: 20%; left: 15%; font-size: 35px; animation-delay: -2s; }
+.wd4 { top: 65%; right: 15%; font-size: 32px; animation-delay: -1s; }
+.wd5 { top: 15%; right: 20%; font-size: 28px; animation-delay: -3s; }
+
+@keyframes doodleFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-18px) rotate(10deg); }
+}
+
+/* BOTTOM */
+
+.work-bottom {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #778365;
+}
+
+.work-message {
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.work-message h3 {
+  font: 500 clamp(40px, 6vw, 75px)/1.15 var(--serif);
+  margin: 25px 0;
+}
+
+.work-message h3 em {
+  color: #879477;
+}
+
+.work-message p {
+  font-size: 13px;
+  color: #858977;
+  line-height: 1.8;
+}
+
+@media(max-width: 650px) {
+  .work-world {
+    padding: 75px 4% 35px;
+  }
+
+  .work-title h2 {
+    letter-spacing: -3px;
+  }
+
+  .work-small {
+    font-size: 16px;
+  }
+
+  .comic-bubble {
+    font-size: 10px;
+    padding: 10px 14px;
+  }
+
+  .bubble-one {
+    top: 5%;
+    left: 0;
+  }
+
+  .bubble-two {
+    top: auto;
+    bottom: 10%;
+    right: 0;
+  }
+
+  .work-bottom {
+    font-size: 7px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .work-doodle, .comic-bubble {
+    animation: none;
+  }
+}
+
+</style>
+<script>
+	
+const workIllustration = document.querySelector(".work-illustration");
+const workSection = document.querySelector(".work-world");
+
+if (workIllustration && workSection) {
+  gsap.fromTo(
+    workIllustration,
+    {
+      scale: 0.88,
+    },
+    {
+      scale: 1.18,
+      ease: "none",
+      scrollTrigger: {
+        trigger: workSection,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5,
+      },
+    }
+  );
+}
+
+</script>
+<style>
+	
+/* CHAI COMIC */
+
+.chai-comic {
+  max-width: 900px;
+  margin: 100px auto 65px;
+  padding: 45px 25px;
+  background: #F3E9DC;
+  border: 2px dashed #C6B49B;
+  border-radius: 25px;
+  text-align: center;
+  position: relative;
+}
+
+.chai-heading > span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #8C765F;
+}
+
+.chai-heading h3 {
+  font: 500 clamp(30px, 5vw, 48px) var(--serif);
+  margin: 15px 0;
+  color: #514438;
+}
+
+.chai-heading h3 em {
+  color: #A87958;
+}
+
+.chai-scene {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  height: 330px;
+  margin: 20px auto;
+}
+
+.chai-kettle {
+  position: absolute;
+  width: 220px;
+  left: 3%;
+  top: 35px;
+  transform: rotate(-8deg);
+  transform-origin: 80% 75%;
+  animation: kettleTilt 4s ease-in-out infinite;
+}
+
+.chai-glass {
+  position: absolute;
+  width: 125px;
+  right: 12%;
+  bottom: 5px;
+}
+
+.chai-pour {
+  position: absolute;
+  width: 100px;
+  left: 43%;
+  top: 125px;
+  overflow: visible;
+}
+
+.tea-stream {
+  stroke-dasharray: 230;
+  stroke-dashoffset: 230;
+  animation: teaPour 4s ease-in-out infinite;
+}
+
+@keyframes kettleTilt {
+  0%, 20%, 100% {
+    transform: rotate(-3deg);
+  }
+  35%, 65% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes teaPour {
+  0%, 25% {
+    stroke-dashoffset: 230;
+  }
+  40%, 70% {
+    stroke-dashoffset: 0;
+  }
+  85%, 100% {
+    stroke-dashoffset: 230;
+  }
+}
+
+/* Falling chai drops */
+
+.tea-drop {
+  opacity: 0;
+  animation: dropFall 1.5s ease-in infinite;
+}
+
+.drop-two {
+  animation-delay: .5s;
+}
+
+.drop-three {
+  animation-delay: 1s;
+}
+
+@keyframes dropFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+/* Animated steam */
+
+.chai-steam {
+  position: absolute;
+  color: #B99B7A;
+  font-size: 42px;
+  opacity: 0;
+  animation: steamRise 2.5s ease-out infinite;
+}
+
+.steam-a {
+  right: 20%;
+  top: 60px;
+}
+
+.steam-b {
+  right: 28%;
+  top: 75px;
+  animation-delay: 1.2s;
+}
+
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) rotate(0);
+  }
+  40% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-45px) rotate(20deg);
+  }
+}
+
+/* Kettle spilling droplets */
+
+.chai-spill {
+  position: absolute;
+  color: #B87943;
+  opacity: 0;
+  animation: spill 2.5s ease-in-out infinite;
+}
+
+.spill-a {
+  left: 48%;
+  top: 65%;
+}
+
+.spill-b {
+  left: 56%;
+  top: 70%;
+  animation-delay: .6s;
+}
+
+.spill-c {
+  left: 43%;
+  top: 72%;
+  animation-delay: 1.2s;
+}
+
+@keyframes spill {
+  0%, 30% {
+    opacity: 0;
+    transform: translateY(-10px) scale(.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(35px) scale(.4);
+  }
+}
+
+/* Speech bubble */
+
+.chai-speech {
+  position: absolute;
+  right: -3%;
+  top: 5%;
+  background: #FFFDF5;
+  border: 2px solid #A58C71;
+  border-radius: 50%;
+  padding: 18px 22px;
+  color: #8B6549;
+  font: italic 14px var(--serif);
+  transform: rotate(6deg);
+}
+
+.chai-speech span {
+  display: block;
+  color: #C99E9C;
+}
+
+/* Decorative stars */
+
+.chai-star {
+  position: absolute;
+  color: #B68C6C;
+  animation: doodleFloat 4s ease-in-out infinite;
+}
+
+.star-a {
+  left: 4%;
+  top: 10%;
+  font-size: 30px;
+}
+
+.star-b {
+  right: 5%;
+  bottom: 15%;
+  font-size: 35px;
+}
+
+.star-c {
+  left: 20%;
+  bottom: 5%;
+  font-size: 25px;
+}
+
+/* Caption */
+
+.chai-caption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: #8B6549;
+}
+
+.chai-caption p {
+  font: italic 15px var(--serif);
+}
+
+.chai-caption span {
+  color: #C99E9C;
+}
+
+@media(max-width: 600px) {
+  .chai-comic {
+    padding: 35px 12px;
+    margin: 65px auto;
+  }
+
+  .chai-scene {
+    height: 270px;
+    transform: scale(.85);
+    transform-origin: center center;
+    width: 115%;
+    margin-left: -7.5%;
+  }
+
+  .chai-kettle {
+    width: 170px;
+  }
+
+  .chai-glass {
+    width: 105px;
+  }
+
+  .chai-speech {
+    right: 0;
+    font-size: 11px;
+  }
+
+  .chai-caption p {
+    font-size: 12px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .chai-kettle,
+  .tea-stream,
+  .tea-drop,
+  .chai-steam,
+  .chai-spill,
+  .chai-star {
+    animation: none;
+  }
+
+  .tea-stream {
+    stroke-dashoffset: 0;
+  }
+}
+
+</style>
